@@ -5,7 +5,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Load JSON data from file
-with open('output/evaluation_results.json', 'r', encoding='utf-8') as f:
+with open('output/evaluation_cosine_1.json', 'r', encoding='utf-8') as f:
     data = json.load(f)
 # Convert JSON dict to list of dicts
 records = []
@@ -21,7 +21,7 @@ df_melted = df.melt(id_vars='file', value_vars=['recall', 'precision', 'f1'], va
 
 plt.figure(figsize=(12,6))
 sns.barplot(x='file', y='Value', hue='Metric', data=df_melted)
-plt.title('Common Word Summary Evaluation Metrics')
+plt.title('Cosine 1 - Summary Evaluation Metrics')
 plt.ylabel('Percentage')
 plt.xlabel('File')
 plt.show()

@@ -29,7 +29,7 @@ class Summarizer:
         sorted_indices = sorted(range(num_sentences), key=lambda i: self.pagerank_scores[i], reverse=True)
         return sorted_indices[:top_n]
 
-    def get_summary_sentences(self):
+    def get_summary_dict(self):
         """
         Get the summary sentences as a list of strings.
 
@@ -37,8 +37,8 @@ class Summarizer:
             List[str]: List of top sentences (by sentence_text).
         """
         top_sentence_ids = self.get_top_sentence_ids()
-        # Return sentences' text in selection order
-        return [self.sentences_dict[i]['sentence_text'] for i in top_sentence_ids]
+        # Return dictionary id and sentences' text in selection order
+        return {i: self.sentences_dict[i]['sentence_text'] for i in top_sentence_ids}
 
     def print_summary(self):
         """
@@ -51,4 +51,4 @@ class Summarizer:
         # for i in top_sentence_ids:
         #     print(f"Sentence ID {i}: {self.pagerank_scores[i]:.8f} - {self.sentences_dict[i]['sentence_text']}")
         print("\nSummary Complete.")
-        return self.get_summary_sentences()
+        return self.get_summary_dict()

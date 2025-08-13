@@ -20,12 +20,15 @@ print(f"Input File Path: {input_file_path}")
 # Read the input document file
 doc_file = FileReader(input_file_path).read_file()
 # Parse the document to extract sentences and their metadata
-# Assuming ParseDoc.parse_doc returns a dictionary with sentence_id as keys and metadata as values
+# ParseDoc.parse_doc returns a dictionary with sentence_id as keys and metadata as values
 sentences_dict = ParseDoc.parse_doc(doc_file)
+print("Sentences Dict:", sentences_dict)
 
 # preprocess the sentences for further analysis
 preprocessor = Preprocessor(use_lemmatizer=True, language='english')
 processed_sentence_text_dict = preprocessor.preprocess_dict(sentences_dict)
+# print("Processed Sentences:", processed_sentence_text_dict)
+
 
 # Create a connection matrix based on common words in sentences
 connection_matrix = ConnectionMatrix(
@@ -33,6 +36,7 @@ connection_matrix = ConnectionMatrix(
     min_common_words=4,
     max_common_words=10
 ).create_matrix()
+# print ("Connection Matrix:", connection_matrix)
 
 # Calculate PageRank scores based on the connection matrix
 pagerank_calculator = PageRankCalculator(connection_matrix)
@@ -70,11 +74,12 @@ evaluator = Evaluator(
     preference_sum_dict=preference_sum_dict
 )
 evaluation_results = evaluator.evaluate()
-# write evaluation results to a JSON file inlcuding filename and scores
-evaluation_output_path = 'output/evaluation_results.json'
-with open(evaluation_output_path, 'w', encoding='utf-8') as eval_file:
-    json.dump({
-        'file_name': file_name,
-        'evaluation_results': evaluation_results
-    }, eval_file, ensure_ascii=False, indent=4)
+print("Evaluation Results:", evaluation_results)
+# # write evaluation results to a JSON file inlcuding filename and scores
+# evaluation_output_path = 'output/evaluation_results.json'
+# with open(evaluation_output_path, 'w', encoding='utf-8') as eval_file:
+#     json.dump({
+#         'file_name': file_name,
+#         'evaluation_results': evaluation_results
+#     }, eval_file, ensure_ascii=False, indent=4)
 

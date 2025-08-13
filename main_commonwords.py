@@ -68,7 +68,7 @@ def process_file(file_name, base_text_dir='Data/DUC_TEXT/test', base_preference_
     )
     evaluation_results = evaluator.evaluate()
     # write evaluation results to a JSON file inlcuding filename and scores of each file in the same JSON file
-    evaluation_output_path = 'output/evaluation_results.json'
+    evaluation_output_path = 'output/evaluation_commonwords.json'
     # write or append evaluation results to the JSON file
     if os.path.exists(evaluation_output_path):
         with open(evaluation_output_path, 'r+', encoding='utf-8') as eval_file:
