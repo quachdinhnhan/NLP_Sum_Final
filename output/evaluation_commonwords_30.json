@@ -1,0 +1,74 @@
+{
+    "d112h": {
+        "labeled": 11,
+        "extracted": 71,
+        "matched": 3,
+        "recall": 27.27,
+        "precision": 4.23,
+        "f1": 7.32
+    },
+    "d113h": {
+        "labeled": 14,
+        "extracted": 47,
+        "matched": 10,
+        "recall": 71.43,
+        "precision": 21.28,
+        "f1": 32.79
+    },
+    "d114h": {
+        "labeled": 18,
+        "extracted": 110,
+        "matched": 9,
+        "recall": 50.0,
+        "precision": 8.18,
+        "f1": 14.06
+    },
+    "d115i": {
+        "labeled": 21,
+        "extracted": 78,
+        "matched": 5,
+        "recall": 23.81,
+        "precision": 6.41,
+        "f1": 10.1
+    },
+    "d116i": {
+        "labeled": 16,
+        "extracted": 101,
+        "matched": 5,
+        "recall": 31.25,
+        "precision": 4.95,
+        "f1": 8.55
+    },
+    "d117i": {
+        "labeled": 15,
+        "extracted": 84,
+        "matched": 10,
+        "recall": 66.67,
+        "precision": 11.9,
+        "f1": 20.2
+    },
+    "d118i": {
+        "labeled": 12,
+        "extracted": 113,
+        "matched": 7,
+        "recall": 58.33,
+        "precision": 6.19,
+        "f1": 11.2
+    },
+    "d119i": {
+        "labeled": 10,
+        "extracted": 68,
+        "matched": 9,
+        "recall": 90.0,
+        "precision": 13.24,
+        "f1": 23.08
+    },
+    "d120i": {
+        "labeled": 6,
+        "extracted": 116,
+        "matched": 5,
+        "recall": 83.33,
+        "precision": 4.31,
+        "f1": 8.2
+    }
+}

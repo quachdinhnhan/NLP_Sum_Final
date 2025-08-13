@@ -4,7 +4,7 @@ import re
 import numpy as np
 
 class ConnectionMatrix:
-    def __init__(self, sentences, min_common_words=4, max_common_words=10):
+    def __init__(self, sentences, min_common_words=4, max_common_words=100):
         """
         Initialize the ConnectionMatrix class.
         
@@ -31,7 +31,11 @@ class ConnectionMatrix:
         """
         words1 = set(re.findall(r'\b\w+\b', sentence1.lower()))
         words2 = set(re.findall(r'\b\w+\b', sentence2.lower()))
+        
         common_words = words1.intersection(words2)
+        # check if the lenghth of common words is equal to lenght of words1 or words2
+        if len(common_words) == len(words1) or len(common_words) == len(words2):
+            return False
         return self.min_common_words <= len(common_words) <= self.max_common_words
 
     def create_matrix(self):

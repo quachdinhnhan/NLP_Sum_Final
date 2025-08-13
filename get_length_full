@@ -1,0 +1,24 @@
+from Sum_module.file_reader import FileReader
+from Sum_module.parse_doc import ParseDoc
+from Sum_module.preprocess import Preprocessor
+
+import os
+from math import log
+
+base_text_dir = 'Data/DUC_TEXT/test'
+file_names = [f for f in os.listdir(base_text_dir) if os.path.isfile(os.path.join(base_text_dir, f))]
+file_names = sorted(file_names)
+print(file_names)
+
+for file_name in file_names:
+    print(f"Processing file: {file_name}")
+    input_file_path = os.path.join(base_text_dir, file_name)
+    doc_file = FileReader(input_file_path).read_file() 
+    sentences_dict = ParseDoc.parse_doc(doc_file)
+    print (len(sentences_dict), " sentences found in the document.")
+    #calcultate number of words in sentences_dict
+    total_words = sum(len(data['sentence_text'].split()) for data in sentences_dict.values())
+    print(f"Total words in sentences: {total_words}")
+    Optimal_threshold = max(2, min(8, 3 * log(total_words/1000)))
+    print(f"Optimal threshold for sentence length: {Optimal_threshold}")
+    print(f"Finished processing file: {file_name}")

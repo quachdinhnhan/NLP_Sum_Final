@@ -29,13 +29,13 @@ def process_file(file_name, base_text_dir='Data/DUC_TEXT/test', base_preference_
     connection_matrix = ConnectionMatrix(
         sentences=list(processed_sentence_text_dict.values()),
         min_common_words=4,
-        max_common_words=10
+        max_common_words=5000
     ).create_matrix()
-
+    #----------------------------------------------------------------
     # Calculate PageRank scores based on the connection matrix
     pagerank_calculator = PageRankCalculator(connection_matrix)
     pagerank_scores = pagerank_calculator.calculator()
-
+    #----------------------------------------------------------------
     # Create a summarizer instance to extract top sentences based on PageRank scores
     summarizer = Summarizer(
         sentences_dict=sentences_dict,
@@ -43,19 +43,19 @@ def process_file(file_name, base_text_dir='Data/DUC_TEXT/test', base_preference_
         top_percent=0.1
     )
     
-    summary_sentences = summarizer.get_summary_sentences()
+    # summary_sentences = summarizer.get_summary_dict()
     summarizer.print_summary()
-
+    #----------------------------------------------------------------
     # Write the summary sentences to an output file
     output_writer = OutputWriter(
         sentences_dict=sentences_dict,
         output_dir='output'
     )
     
-    output_file_path = output_writer.write_summary(
+    output_writer.write_summary(
         summary_sentence_ids=summarizer.get_top_sentence_ids(),
         input_file_path=input_file_path,
-        suffix='_commonword'
+        suffix='_commonwords_test' 
     )
     # Parse the preference summary file
     preference_doc_file = FileReader(preference_file_path).read_file()
@@ -68,7 +68,7 @@ def process_file(file_name, base_text_dir='Data/DUC_TEXT/test', base_preference_
     )
     evaluation_results = evaluator.evaluate()
     # write evaluation results to a JSON file inlcuding filename and scores of each file in the same JSON file
-    evaluation_output_path = 'output/evaluation_commonwords.json'
+    evaluation_output_path = 'output/evaluation_commonwords_test.json'
     # write or append evaluation results to the JSON file
     if os.path.exists(evaluation_output_path):
         with open(evaluation_output_path, 'r+', encoding='utf-8') as eval_file:
@@ -84,8 +84,8 @@ def process_file(file_name, base_text_dir='Data/DUC_TEXT/test', base_preference_
 
 def main():
     
-    # file_names = [
-    #     'd112h',
+    file_names = [
+        'd112h',
     #     'd113h',
     #     'd114h',
     #     'd115i',   
@@ -94,10 +94,10 @@ def main():
     #     'd118i',
     #     'd119i',
     #     'd120i',
-    # ]
+    ]
     test_dir = 'Data/DUC_TEXT/test'
-    file_names = [f for f in os.listdir(test_dir) if os.path.isfile(os.path.join(test_dir, f))]
-    file_names = sorted(file_names)
+    # file_names = [f for f in os.listdir(test_dir) if os.path.isfile(os.path.join(test_dir, f))]
+    # file_names = sorted(file_names)
     print(file_names)
 
     for file_name in file_names:

@@ -20,8 +20,8 @@ def process_file(file_name, base_text_dir='Data/DUC_TEXT/test', base_preference_
     doc_file = FileReader(input_file_path).read_file()
 
     # Parse the document to extract sentences and their metadata
-    # sentences_dict = ParseDoc.parse_doc_min_word_count(doc_file)
-    sentences_dict = ParseDoc.parse_doc(doc_file)
+    sentences_dict = ParseDoc.parse_doc_min_word_count(doc_file)
+    # sentences_dict = ParseDoc.parse_doc(doc_file)
 
     # Preprocess the sentences for further analysis
     preprocessor = Preprocessor(use_lemmatizer=True, language='english')
@@ -43,10 +43,10 @@ def process_file(file_name, base_text_dir='Data/DUC_TEXT/test', base_preference_
     summarizer = Summarizer(
         sentences_dict=sentences_dict,
         pagerank_scores=pagerank_scores,
-        top_percent=0.1
+        top_percent=0.2
     )
     
-    summary_sentences = summarizer.get_summary_sentences()
+    summary_sentences = summarizer.get_summary_dict()
     summarizer.print_summary()
 
     # Write the summary sentences to an output file
@@ -58,7 +58,7 @@ def process_file(file_name, base_text_dir='Data/DUC_TEXT/test', base_preference_
     output_file_path = output_writer.write_summary(
         summary_sentence_ids=summarizer.get_top_sentence_ids(),
         input_file_path=input_file_path,
-        suffix='_cosine_1'  # Changed suffix to indicate cosine similarity method
+        suffix='_cosine_20_s'  # Changed suffix to indicate cosine similarity method
     )
     
     # Parse the preference summary file
@@ -72,7 +72,7 @@ def process_file(file_name, base_text_dir='Data/DUC_TEXT/test', base_preference_
     )
     evaluation_results = evaluator.evaluate()
     # write evaluation results to a JSON file inlcuding filename and scores of each file in the same JSON file
-    evaluation_output_path = 'output/evaluation_cosine_1.json'
+    evaluation_output_path = 'output/evaluation_cosine_20_s.json'
     # write or append evaluation results to the JSON file
     if os.path.exists(evaluation_output_path):
         with open(evaluation_output_path, 'r+', encoding='utf-8') as eval_file:

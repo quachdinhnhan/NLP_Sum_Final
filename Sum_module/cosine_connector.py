@@ -17,9 +17,11 @@ class CosineSimilarityConnector:
         Returns:
             np.ndarray: Cosine similarity matrix (n_sentences, n_sentences)
         """
-        # Normalize each row (sentence vector) to unit length
+        # Normalize each row (sentence vector) to unit length 
+        # computes the L2 norm (Euclidean length) of each row vector.
         norm = np.linalg.norm(tfidf_matrix, axis=1, keepdims=True)
         # Avoid division by zero
+        # Some sentences might have all-zero TF-IDF values (e.g., empty or stopword-only sentences), resulting in a norm of 0
         norm[norm == 0] = 1
         normalized_matrix = tfidf_matrix / norm
         # Cosine similarity is the dot product of normalized vectors

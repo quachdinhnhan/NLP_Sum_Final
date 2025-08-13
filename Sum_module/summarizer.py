@@ -24,6 +24,7 @@ class Summarizer:
             List[int]: List of sentence IDs for the top scoring sentences.
         """
         num_sentences = len(self.pagerank_scores)
+        # num_sentences = len(self.full_sentences_dict)
         top_n = max(1, int(self.top_percent * num_sentences))  # At least one sentence
         # Sort indices by score descending and take top_n
         sorted_indices = sorted(range(num_sentences), key=lambda i: self.pagerank_scores[i], reverse=True)

@@ -58,6 +58,8 @@ class Evaluator:
         precision = round(precision, 2)
         f1 = round(f1, 2)
         return {
+            "labeled": pref_len,
+            "extracted": len(self.summary_sentence_ids),
             "matched": matched,
             "recall": recall,
             "precision": precision,

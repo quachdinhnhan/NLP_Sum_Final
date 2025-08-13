@@ -49,7 +49,7 @@ summarizer = Summarizer(
     pagerank_scores=pagerank_scores,
     top_percent=0.1
 )
-summary_sentences = summarizer.get_summary_sentences()
+summary_sentences = summarizer.get_summary_dict()
 summarizer.print_summary()
 
 # Write the summary sentences to an output file
