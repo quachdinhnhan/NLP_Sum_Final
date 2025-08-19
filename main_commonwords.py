@@ -29,7 +29,7 @@ def process_file(file_name, base_text_dir='Data/DUC_TEXT/test', base_preference_
     connection_matrix = ConnectionMatrix(
         sentences=list(processed_sentence_text_dict.values()),
         min_common_words=4,
-        max_common_words=5000
+        # max_common_words=5000
     ).create_matrix()
     #----------------------------------------------------------------
     # Calculate PageRank scores based on the connection matrix
@@ -84,8 +84,8 @@ def process_file(file_name, base_text_dir='Data/DUC_TEXT/test', base_preference_
 
 def main():
     
-    file_names = [
-        'd112h',
+    # file_names = [
+    #     'd112h',
     #     'd113h',
     #     'd114h',
     #     'd115i',   
@@ -94,10 +94,10 @@ def main():
     #     'd118i',
     #     'd119i',
     #     'd120i',
-    ]
+    # ]
     test_dir = 'Data/DUC_TEXT/test'
-    # file_names = [f for f in os.listdir(test_dir) if os.path.isfile(os.path.join(test_dir, f))]
-    # file_names = sorted(file_names)
+    file_names = [f for f in os.listdir(test_dir) if os.path.isfile(os.path.join(test_dir, f))]
+    file_names = sorted(file_names)
     print(file_names)
 
     for file_name in file_names:

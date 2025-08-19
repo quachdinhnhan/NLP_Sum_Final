@@ -10,8 +10,7 @@ class Preprocessor:
         self.lemmatizer = WordNetLemmatizer() if use_lemmatizer else None
     
     def preprocess_text(self, text):
-        # 1. Coreference resolution
-        # text = self.resolve_coreferences(text)
+        
         # Remove punctuation
         text = text.translate(str.maketrans('', '', string.punctuation))
         # Convert to lowercase

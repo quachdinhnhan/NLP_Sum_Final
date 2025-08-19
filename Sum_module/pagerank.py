@@ -23,14 +23,22 @@ class PageRankCalculator:
 
     def _build_transition_matrix(self):
         """Build the stochastic transition matrix from the connection matrix."""
-        row_sums = np.sum(self.connection_matrix, axis=1)
+        row_sums = np.sum(self.connection_matrix>0, axis=1)
+        # Count row_sums by if the connection_matrix [i,:]>0 then row_sums +1 
+    
+        # row_sums = np.zeros(self.num_nodes, dtype=int)
+        # for i in range(self.num_nodes):
+        #     for j in range(self.num_nodes):
+        #         if self.connection_matrix[i, j] > 0:
+        #             row_sums[i] += 1
+        
         transition = np.zeros_like(self.connection_matrix, dtype=float)
 
         for i in range(self.num_nodes):
             if row_sums[i] > 0:
                 transition[i, :] = self.connection_matrix[i, :] / row_sums[i]
             # If a row sums to zero, that row remains zero (dangling node)
-
+        #
         return transition
 
     def calculator(self):
@@ -41,8 +49,7 @@ class PageRankCalculator:
             np.ndarray: Final PageRank scores.
         """
         for iteration in range(self.max_iterations):
-            new_scores = (1 - self.damping) / self.num_nodes \
-                         + self.damping * self.transition_matrix.T @ self.pagerank_scores
+            new_scores = (1 - self.damping) / self.num_nodes + self.damping * self.transition_matrix.T @ self.pagerank_scores
 
             if np.linalg.norm(new_scores - self.pagerank_scores, ord=1) < self.tolerance:
                 print(f"PageRank converged after {iteration + 1} iterations.")

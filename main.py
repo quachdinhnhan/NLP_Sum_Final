@@ -34,7 +34,7 @@ processed_sentence_text_dict = preprocessor.preprocess_dict(sentences_dict)
 connection_matrix = ConnectionMatrix(
     sentences=list(processed_sentence_text_dict.values()),
     min_common_words=4,
-    max_common_words=10
+    # max_common_words=10
 ).create_matrix()
 # print ("Connection Matrix:", connection_matrix)
 

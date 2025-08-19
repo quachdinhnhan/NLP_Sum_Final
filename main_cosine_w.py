@@ -47,7 +47,7 @@ def process_file(file_name, base_text_dir='Data/DUC_TEXT/test', base_preference_
         sentences_dict=sentences_dict,
         full_sentences_dict=full_sentences_dict,
         pagerank_scores=pagerank_scores,
-        top_percent=0.4
+        top_percent=0.1
     )
     
     summary_sentences = summarizer.get_summary_dict()
@@ -62,7 +62,7 @@ def process_file(file_name, base_text_dir='Data/DUC_TEXT/test', base_preference_
     output_file_path = output_writer.write_summary(
         summary_sentence_ids=summarizer.get_top_sentence_ids(),
         input_file_path=input_file_path,
-        suffix='_cosine_w_40'  # Changed suffix to indicate cosine similarity method
+        suffix='_cosine_w_new'  # Changed suffix to indicate cosine similarity method
     )
     
     # Parse the preference summary file
@@ -76,7 +76,7 @@ def process_file(file_name, base_text_dir='Data/DUC_TEXT/test', base_preference_
     )
     evaluation_results = evaluator.evaluate()
     # write evaluation results to a JSON file inlcuding filename and scores of each file in the same JSON file
-    evaluation_output_path = 'output/evaluation_cosine_w_40.json'
+    evaluation_output_path = 'output/evaluation_cosine_w_new.json'
     # write or append evaluation results to the JSON file
     if os.path.exists(evaluation_output_path):
         with open(evaluation_output_path, 'r+', encoding='utf-8') as eval_file:

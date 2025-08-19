@@ -15,7 +15,7 @@ class TFIDFVectorizer:
         Fit the TF-IDF model and return the TF-IDF matrix and supporting dicts.
         Args:
             processed_sentence_text_dict: dict of {sentence_id: preprocessed_text}
-            min_words (int): Minimum number of words required to include sentence.
+           
         Returns:
             tf_idf_matrix: np.ndarray, shape (num_sentences, num_words)
             word_index: dict mapping word to col index in tfidf matrix
@@ -35,7 +35,7 @@ class TFIDFVectorizer:
                     tf[word] /= total_words
             tf_dict[sentence_id] = tf
 
-        # Step 2: Compute document frequency (df) for each word
+        # Step 2: Compute document frequency (df) for each word_ in this project df is sentence freq
         df = {}
         for tf in tf_dict.values():
             for word in tf:
